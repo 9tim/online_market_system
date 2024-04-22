@@ -4,10 +4,10 @@ from sqlalchemy.orm.session import Session
 from crud.order_crud import get_order_by_id, get_orders, delete_order
 from schemas.order_schema import OrderPage
 
-routerO = APIRouter()
+router = APIRouter()
 
 #訂單編號查詢
-@routerO.get("/orders/{order_id}")
+@router.get("/{order_id}", summary="查詢訂單細節功能")
 def read_order_id(order_id: int, db:Session= Depends(get_db)):
     res = get_order_by_id(db,order_id)
     
@@ -17,7 +17,7 @@ def read_order_id(order_id: int, db:Session= Depends(get_db)):
     return res
 
 #查詢全部訂單
-@routerO.get("/users/{user_id}/orders", response_model=OrderPage)
+@router.get("/users/{user_id}", response_model=OrderPage, summary="查詢訂單列表功能")
 def get_user_all_orders(user_id: int, limit: int = 10, offset: int = 0, db: Session= Depends(get_db)):
     order_list, count= get_orders(db, user_id, limit, offset)
     
@@ -28,7 +28,7 @@ def get_user_all_orders(user_id: int, limit: int = 10, offset: int = 0, db: Sess
     return page
 
 #取消訂單
-@routerO.delete("/delete_order/{order_id}")
+@router.delete("/delete_order/{order_id}", summary="取消訂單功能")
 def delete_user(order_id: int, db:Session= Depends(get_db)):
     try:
         delete_order(db,order_id)

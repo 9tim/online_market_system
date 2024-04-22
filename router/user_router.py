@@ -4,9 +4,9 @@ from sqlalchemy.orm.session import Session
 from schemas.user_schema import UserLogin, UserRegister
 from crud.user_crud import register_by_user_msg, get_user_by_id
 
-routerU = APIRouter()
+router = APIRouter()
 
-@routerU.post("/users/register")
+@router.post("/register", summary="註冊功能")
 def register (user_msg: UserRegister, db: Session= Depends(get_db)):
     user_id = register_by_user_msg(db,user_msg)
    
