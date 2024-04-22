@@ -1,3 +1,6 @@
+# schema.py
+
+# Pydantic 是用於數據驗證、序列化和反序列化的庫，通常用於處理請求和響應數據。
 from pydantic import BaseModel
 from datetime import datetime
 from typing import List
