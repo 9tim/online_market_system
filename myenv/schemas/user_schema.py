@@ -22,5 +22,6 @@ class UserLogin(BaseModel):
 class ResponseMSG(BaseModel):
     user_id: int 
     email: str
+    role: str
     created_date: datetime 
     last_modified_date: datetime

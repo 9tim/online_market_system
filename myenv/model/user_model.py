@@ -10,5 +10,6 @@ class User(Base):
     user_id = Column(Integer, primary_key=True)
     email = Column(String)
     password = Column(String)
+    role = Column(String)
     created_date = Column(DateTime)
     last_modified_date = Column(DateTime)
