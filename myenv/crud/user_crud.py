@@ -40,7 +40,12 @@ def create_by_user_msg(boxSession: Session, user_msg: UserRegister) -> int:
     current_time = datetime.now()
     
     # 創建新的 PeopleInfo 對象，設置密碼、創建時間和最後更動時間
-    new_user_info  = User(password=hashed_password, role='CUSTOMER', created_date=current_time, last_modified_date=current_time, **user_msg.model_dump(exclude={'password', 'user_id'}))
+    new_user_info  = User(password=hashed_password, 
+                          role='CUSTOMER', 
+                          created_date=current_time, 
+                          last_modified_date=current_time, 
+                          **user_msg.model_dump(exclude={'password', 'user_id'})
+                          )
     
     # 添加到資料庫，提交並刷新
     boxSession.add(new_user_info)

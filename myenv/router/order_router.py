@@ -1,16 +1,18 @@
+from typing import List
+
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm.session import Session
 
 from database import get_db
 from crud.order_crud import get_order_by_id, get_orders, delete_order
-from schemas.order_schema import OrderPage, Order
+from schemas.order_schema import OrderPage, OrderItem
 
 
 router = APIRouter()
 
 
-@router.get("/{order_id}", summary="查詢訂單細節功能")
-def read_order_id(order_id: int, db:Session= Depends(get_db)) -> Order:
+@router.get("/{order_id}", response_model = List[OrderItem], summary="查詢訂單細節功能")
+def read_order_id(order_id: int, db:Session= Depends(get_db)) -> List[OrderItem]:
     res = get_order_by_id(db,order_id)
     
     if res is None:

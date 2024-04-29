@@ -3,11 +3,11 @@ from typing import List, Tuple
 from sqlalchemy.orm import Session
 from sqlalchemy import  func
 
-from model.order_model import Order
+from model.order_model import Order, OrderItem
 
 
-def get_order_by_id(boxSession: Session, _order_id: int) -> Order:
-    return boxSession.query(Order).filter(Order.order_id == _order_id).first()
+def get_order_by_id(boxSession: Session, _order_id: int) -> List[OrderItem]:
+    return boxSession.query(OrderItem).filter(OrderItem.order_id == _order_id)
 
 
 def get_orders(boxSession: Session, _user_id: int, _limit: int, _offset:int) -> Tuple[List[Order], int]:
